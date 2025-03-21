@@ -276,5 +276,5 @@ class Template:
         # drop last
         return conversations[:-1]
 if __name__ == '__main__':
-    prompt_template = Template("chatglm",prefix="")
+    prompt_template = Template("default",prefix="")
     print(prompt_template.prefix)

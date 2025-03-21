@@ -4,6 +4,8 @@
 # @Email : gzlishouxian@gmail.com
 # @File : train.py
 # @Software: PyCharm
+
+
 from engines.models import BaseModels
 from engines.utils.print_parameters import print_trainable_parameters
 from engines.utils.metrics import Metrics
@@ -129,9 +131,10 @@ class Train(BaseModels):
                 task_type=TaskType.CAUSAL_LM,
                 num_virtual_tokens=self.training_args.num_virtual_tokens,
                 encoder_hidden_size=self.training_args.prompt_encoder_hidden_size,
-                prefix_projection=True,
+                prefix_projection=False,
             )
             model.gradient_checkpointing_disable()
+
             model = get_peft_model(model, peft_config)
             model.print_trainable_parameters()
         return model
@@ -220,6 +223,8 @@ class Train(BaseModels):
         if not test:
             model = self.construct_base_model(model)
             self.set_train_environment(model)
+            if self.training_args.gradient_checkpointing==False:
+                model.use_cache=False
             self.logger.info(f'Model struct:\n{model}')
             train_dataset, eval_dataset = self.data_manager.prepare_dataset()
             trainer = SFTTrainer(

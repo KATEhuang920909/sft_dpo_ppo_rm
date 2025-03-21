@@ -45,6 +45,7 @@ class DataManager:
         elif self.model_args.model_type == 'llama':
             tokenizer = LlamaTokenizer.from_pretrained(model_path, use_fast=self.model_args.use_fast_tokenizer,
                                                        padding_side=self.model_args.padding_side)
+            tokenizer.truncation=True
         else:
             raise
 
