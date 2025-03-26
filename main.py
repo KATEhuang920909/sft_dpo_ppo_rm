@@ -17,12 +17,12 @@ warnings.filterwarnings("ignore")
 if __name__ == '__main__':
     config = Configure()
     mode = config.mode
-    now = datetime.now()
-    current_time = now.strftime("%Y%m%d_%H%M")
-    model_type=config.model_args.model_type
-    fine_tuning_type = config.training_args.fine_tuning_type
-    log_name = f'./logs/{mode}_{model_type}_{fine_tuning_type}' + '.log'
-    logger.add(log_name, encoding='utf-8')
+    # now = datetime.now()
+    # current_time = now.strftime("%Y%m%d_%H%M")
+    # model_type = config.model_args.model_type
+    # fine_tuning_type = config.training_args.fine_tuning_type
+    # log_name = f'./logs/{current_time}_{mode}_{model_type}_{fine_tuning_type}' + '.log'
+    # logger.add(log_name, encoding='utf-8')
 
     data_manager = DataManager(config, logger)
     if mode == 'pretrain':
